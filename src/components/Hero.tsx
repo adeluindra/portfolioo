@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import { profile } from "@/data/profile";
 
@@ -24,7 +25,7 @@ export function Hero() {
           </p>
 
           <p className="mb-4 text-base font-medium text-muted">
-            Hello, I&apos;m a developer who enjoys solving
+            Hello, I'm a developer who enjoys solving
             practical problems 👋
           </p>
 
@@ -88,7 +89,7 @@ export function Hero() {
           <div className="overflow-hidden rounded-[32px] border border-line bg-white p-3 shadow-[0_24px_90px_rgba(15,23,42,0.10)]">
             <div className="relative aspect-[4/4.2] overflow-hidden rounded-[24px] bg-slate-100">
               <Image
-                src="/images/profile.webp"
+                src="/images/profile.jpg"
                 alt="Portrait of Moh Syafiq Ade Luwindra"
                 fill
                 priority
@@ -112,7 +113,7 @@ export function Hero() {
                 aria-hidden="true"
                 className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-xl font-bold text-accent"
               >
-                {`</>`}
+                {"</>"}
               </span>
             </div>
           </div>

@@ -7,3 +7,7 @@ build/
 *.log
 .DS_Store
 *.tsbuildinfo
+
+# Ignored documents
+PORTFOLIO_UI_DESIGN_V1.md
+public/docs/resume.pdf
