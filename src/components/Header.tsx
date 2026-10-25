@@ -1,5 +1,7 @@
+
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 
@@ -31,26 +33,27 @@ export function Header() {
   return (
     <header className="site-header sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-xl">
       <div className="container-page flex h-[72px] items-center justify-between gap-5">
-        <a
+        <Link
           href="/#home"
           className="text-xl font-extrabold tracking-[-0.075em] text-foreground focus-ring"
           aria-label="MSAL, back to top"
+          onClick={() => setIsOpen(false)}
         >
           MSAL<span className="text-accent">.</span>
-        </a>
+        </Link>
 
         <nav
           aria-label="Main navigation"
           className="hidden items-center gap-8 md:flex"
         >
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="nav-link focus-ring"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -87,14 +90,14 @@ export function Header() {
         >
           <div className="container-page flex flex-col gap-1">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className="rounded-lg px-3 py-3 text-sm font-medium text-foreground hover:bg-slate-100 focus-ring"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
 
             <a

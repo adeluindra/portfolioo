@@ -25,7 +25,7 @@ export function Hero() {
           </p>
 
           <p className="mb-4 text-base font-medium text-muted">
-            Hello, I'm a developer who enjoys solving
+            Hello, I&apos;m a developer who enjoys solving
             practical problems 👋
           </p>
 
