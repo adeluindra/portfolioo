@@ -7,9 +7,16 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "ParentCare — Case Study | Moh Syafiq Ade Luwindra",
+  title:
+    "ParentCare — Case Study | Moh Syafiq Ade Luwindra",
   description:
-    "A case study of ParentCare, a collaborative parenting platform developed during Coding Camp 2025.",
+    "Explore ParentCare, a collaborative digital parenting platform developed as a Coding Camp 2025 capstone project.",
+  openGraph: {
+    title: "ParentCare — Team Capstone Project",
+    description:
+      "An interactive parenting platform featuring a parenting-style quiz, recommendations, community discussions, and educational articles.",
+    type: "article",
+  },
 };
 
 const technologies = [
@@ -20,33 +27,51 @@ const technologies = [
   "Supabase",
 ] as const;
 
+const projectFacts = [
+  {
+    label: "Project Type",
+    value: "Team Capstone",
+  },
+  {
+    label: "Program",
+    value: "Coding Camp 2025",
+  },
+  {
+    label: "Focus",
+    value: "Full-Stack Development",
+  },
+] as const;
+
 const gallery = [
   {
     number: "01",
     eyebrow: "Interactive Quiz",
     title: "Parent Match Quiz",
     description:
-      "Users answer a series of parenting-related questions through a step-by-step questionnaire. A progress indicator and answer choices guide the interaction.",
+      "A step-by-step questionnaire that helps users explore parenting approaches. The interface provides answer choices, progress feedback, and clear navigation.",
     image: "/images/projects/parentcare-quiz.png",
-    alt: "ParentCare Parent Match quiz interface showing question 10 of 10, answer choices, and navigation buttons",
+    alt:
+      "ParentCare Parent Match quiz with multiple-choice questions and progress indicator",
   },
   {
     number: "02",
     eyebrow: "Quiz Results",
     title: "Recommendations & Practical Tips",
     description:
-      "After completing the quiz, users can explore an analysis of their parenting style, main recommendations, and practical suggestions.",
+      "After completing the questionnaire, users receive a parenting-style analysis with recommendations and practical suggestions based on their quiz results.",
     image: "/images/projects/parentcare-result.png",
-    alt: "ParentCare results screen showing mixed parenting analysis, recommendations, and practical parenting tips",
+    alt:
+      "ParentCare results showing parenting-style analysis, recommendations, and practical tips",
   },
   {
     number: "03",
     eyebrow: "Educational Content",
     title: "Parenting Articles",
     description:
-      "An article listing provides additional content related to parenting and family topics, supporting learning beyond the quiz experience.",
+      "A collection of parenting-related articles allows users to explore educational content beyond the quiz experience.",
     image: "/images/projects/parentcare-articles.png",
-    alt: "ParentCare article page displaying a grid of parenting-related article cards",
+    alt:
+      "ParentCare article page displaying educational content cards",
   },
 ] as const;
 
@@ -56,7 +81,7 @@ export default function ParentCarePage() {
       <Header />
 
       <main id="main-content">
-        {/* HERO */}
+        {/* INTRODUCTION */}
         <section className="section-space bg-background">
           <div className="container-page">
             <Link
@@ -76,38 +101,30 @@ export default function ParentCarePage() {
 
             <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">
               A collaborative digital parenting platform
-              that combines an interactive parenting-style
+              combining an interactive parenting-style
               quiz, personalized recommendations,
-              community discussions, and educational content.
+              community discussions, and educational
+              content in one web application.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-2">
+            {/* TECHNOLOGY STACK */}
+            <ul
+              aria-label="ParentCare technology stack"
+              className="mt-7 flex flex-wrap gap-2"
+            >
               {technologies.map((technology) => (
-                <span
+                <li
                   key={technology}
                   className="rounded-lg border border-line bg-white px-3 py-2 text-xs font-semibold text-muted"
                 >
                   {technology}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
 
-            {/* PROJECT INFORMATION */}
+            {/* PROJECT FACTS */}
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {[
-                {
-                  label: "Project Type",
-                  value: "Team Capstone",
-                },
-                {
-                  label: "Program",
-                  value: "Coding Camp 2025",
-                },
-                {
-                  label: "Development Focus",
-                  value: "Front-End & Back-End",
-                },
-              ].map((item) => (
+              {projectFacts.map((item) => (
                 <div
                   key={item.label}
                   className="rounded-2xl border border-line bg-white p-6"
@@ -115,6 +132,7 @@ export default function ParentCarePage() {
                   <p className="text-xs font-bold uppercase tracking-wider text-subtle">
                     {item.label}
                   </p>
+
                   <p className="mt-3 text-lg font-bold text-foreground">
                     {item.value}
                   </p>
@@ -122,28 +140,27 @@ export default function ParentCarePage() {
               ))}
             </div>
 
-            {/* MAIN SCREENSHOT */}
+            {/* HOMEPAGE SCREENSHOT */}
             <figure className="mt-12 overflow-hidden rounded-[24px] border border-line bg-white shadow-sm">
               <div className="relative aspect-[16/9] overflow-hidden bg-[#fff0eb]">
                 <Image
                   src="/images/projects/parentcare-home.png"
-                  alt="ParentCare homepage displaying the digital parenting platform introduction and family illustration"
+                  alt="ParentCare homepage presenting a digital parenting support platform and family illustration"
                   fill
-                  priority
                   sizes="(max-width: 767px) 100vw, 1120px"
                   className="object-contain"
                 />
               </div>
 
               <figcaption className="border-t border-line px-6 py-4 text-sm text-muted">
-                ParentCare homepage — an introduction to
-                the parenting consultation platform.
+                ParentCare homepage — actual project
+                interface.
               </figcaption>
             </figure>
           </div>
         </section>
 
-        {/* PROBLEM AND SOLUTION */}
+        {/* PROJECT OVERVIEW */}
         <section
           aria-labelledby="overview-heading"
           className="section-space border-t border-line bg-white"
@@ -158,7 +175,7 @@ export default function ParentCarePage() {
                 id="overview-heading"
                 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
               >
-                Helping parents explore parenting approaches
+                Supporting parents through digital experiences
               </h2>
             </div>
 
@@ -169,10 +186,12 @@ export default function ParentCarePage() {
                 </h3>
 
                 <p className="mt-3 leading-8 text-muted">
-                  Bring parenting-style exploration,
-                  educational materials, and community
-                  interaction together in an accessible
-                  web experience.
+                  Parenting information, self-assessment
+                  resources, and community discussions
+                  can be spread across different
+                  platforms. ParentCare explores how
+                  these experiences can be brought
+                  together in a single application.
                 </p>
               </div>
 
@@ -182,30 +201,31 @@ export default function ParentCarePage() {
                 </h3>
 
                 <p className="mt-3 leading-8 text-muted">
-                  ParentCare offers a Parent Match quiz
-                  with result analysis and recommendations,
-                  an article section, and a community forum
-                  as part of one digital platform.
+                  The team developed a web platform
+                  featuring the Parent Match quiz,
+                  parenting-style result analysis,
+                  practical recommendations, an
+                  article section, and a community forum.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-lg font-bold text-foreground">
-                  Development Context
+                  Project Context
                 </h3>
 
                 <p className="mt-3 leading-8 text-muted">
-                  The application was developed
-                  collaboratively as a capstone project
-                  in the Front-End and Back-End Developer
-                  learning path of Coding Camp 2025.
+                  ParentCare was developed as a team
+                  capstone during Coding Camp 2025,
+                  in the Front-End and Back-End
+                  Developer learning path.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* PRODUCT WALKTHROUGH */}
+        {/* FEATURE WALKTHROUGH */}
         <section
           aria-labelledby="walkthrough-heading"
           className="section-space bg-background"
@@ -219,12 +239,13 @@ export default function ParentCarePage() {
               id="walkthrough-heading"
               className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              From taking a quiz to exploring recommendations
+              Exploring the ParentCare experience
             </h2>
 
             <p className="mt-4 max-w-2xl leading-8 text-muted">
-              A walkthrough of the core experience using
-              screenshots captured from the original project.
+              A closer look at the application's
+              key features, using screenshots from
+              the original capstone project.
             </p>
 
             <div className="mt-10 space-y-7">
@@ -271,9 +292,9 @@ export default function ParentCarePage() {
           </div>
         </section>
 
-        {/* LEARNING CONTEXT */}
+        {/* TEAM CONTRIBUTION */}
         <section
-          aria-labelledby="learning-heading"
+          aria-labelledby="collaboration-heading"
           className="section-space bg-white"
         >
           <div className="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
@@ -283,48 +304,49 @@ export default function ParentCarePage() {
               </p>
 
               <h2
-                id="learning-heading"
+                id="collaboration-heading"
                 className="mt-3 text-3xl font-bold tracking-tight text-foreground"
               >
-                Building a product as a team
+                Developing ParentCare as a team
               </h2>
             </div>
 
             <div>
               <p className="leading-8 text-muted">
-                ParentCare was developed during Coding
-                Camp 2025 powered by DBS Foundation.
-                The project brought together frontend
-                development, backend functionality,
-                and collaborative product development.
+                I participated in the development of
+                ParentCare as part of the Coding Camp
+                2025 capstone team. The project
+                provided an opportunity to work on a
+                web application with multiple connected
+                features in a collaborative setting.
               </p>
 
               <p className="mt-5 leading-8 text-muted">
-                The project demonstrates how multiple
-                user-facing features can form one
-                connected web experience, from account
-                access and quiz interactions to result
-                presentation and supporting content.
+                The application brings together
+                interactive questionnaires, result
+                presentation, educational resources,
+                and community features. These
+                capabilities represent the team's
+                collective project work.
               </p>
 
               <div className="mt-8 rounded-2xl border border-line bg-background p-6">
                 <p className="text-sm font-semibold text-foreground">
-                  Project Context
+                  My project involvement
                 </p>
 
                 <p className="mt-2 text-sm leading-7 text-muted">
-                  Collaborative capstone project.
-                  Individual engineering responsibilities
-                  should be documented separately to
-                  distinguish personal contributions
-                  from team contributions.
+                  Capstone team member in the Front-End
+                  and Back-End Developer program,
+                  contributing to the collaborative
+                  development of ParentCare.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* RETURN NAVIGATION */}
+        {/* BACK TO PROJECTS */}
         <section className="border-t border-line bg-background py-12">
           <div className="container-page">
             <Link
