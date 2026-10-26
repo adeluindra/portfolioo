@@ -1,5 +1,7 @@
+
 import Image from "next/image";
 import Link from "next/link";
+
 import { projects } from "@/data/projects";
 import { SectionHeading } from "@/components/SectionHeading";
 
@@ -48,14 +50,14 @@ export function ProjectPreview() {
                   </span>
 
                   <span className="absolute bottom-3 right-3 rounded-lg bg-slate-950/85 px-2.5 py-1.5 text-[11px] font-medium text-white">
-                    Real project screenshot
+                    Project screenshot
                   </span>
                 </div>
               ) : (
                 <div
                   className={`flex aspect-[16/10] flex-col justify-between bg-gradient-to-br p-6 ${backgrounds[index]}`}
                 >
-                  <p className="w-fit rounded-full border border-white/80 bg-white/75 px-3 py-1 text-xs font-semibold text-slate-600 backdrop-blur-sm">
+                  <p className="w-fit rounded-full border border-white/80 bg-white/75 px-3 py-1 text-xs font-semibold text-slate-600">
                     {project.label}
                   </p>
 
@@ -66,11 +68,9 @@ export function ProjectPreview() {
               )}
 
               <div className="flex flex-1 flex-col p-6">
-                {project.coverImage ? (
-                  <h3 className="mb-2 text-xl font-bold tracking-tight text-foreground">
-                    {project.title}
-                  </h3>
-                ) : null}
+                <h3 className="mb-2 text-xl font-bold tracking-tight text-foreground">
+                  {project.title}
+                </h3>
 
                 <p className="text-sm font-semibold text-accent">
                   {project.highlight}
@@ -95,28 +95,28 @@ export function ProjectPreview() {
                 </ul>
 
                 <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-                  {project.caseStudyPath ? (
+                  {project.caseStudyPath && (
                     <Link
                       href={project.caseStudyPath}
-                      className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-accent hover:underline focus-ring"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline focus-ring"
                     >
                       View case study
                       <span aria-hidden="true">→</span>
                     </Link>
-                  ) : null}
+                  )}
 
                   {project.githubUrl ? (
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-muted hover:text-accent hover:underline focus-ring"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-accent hover:underline focus-ring"
                     >
                       GitHub
                       <span aria-hidden="true">↗</span>
                     </a>
                   ) : (
-                    <p className="text-xs font-medium text-subtle">
+                    <p className="text-xs text-subtle">
                       Team capstone · Public repository link pending
                     </p>
                   )}
@@ -127,9 +127,9 @@ export function ProjectPreview() {
         </div>
 
         <p className="mt-6 text-sm text-subtle">
-          BISINDO includes authentic dashboard and live-recognition
-          screenshots. Visual case studies for the other projects
-          will be added once verified assets are available.
+          BISINDO Detector and ParentCare feature authentic
+          application screenshots. DevJourney visuals will
+          be added in the next development checkpoint.
         </p>
       </div>
     </section>

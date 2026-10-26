@@ -1,3 +1,4 @@
+
 export type ProjectSummary = {
   slug: string;
   title: string;
@@ -18,27 +19,42 @@ export const projects: readonly ProjectSummary[] = [
     label: "Thesis / Machine Learning",
     summary:
       "Browser-based Indonesian Sign Language alphabet recognition using real-time hand tracking and classification.",
-    technologies: ["Next.js", "TypeScript", "MediaPipe", "KNN"],
-    githubUrl: "https://github.com/adeluindra/bisindo-detector",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "MediaPipe",
+      "KNN",
+    ],
+    githubUrl:
+      "https://github.com/adeluindra/bisindo-detector",
     highlight: "26 alphabet classes",
-    coverImage: "/images/projects/bisindo-dashboard.jpg",
+    coverImage:
+      "/images/projects/bisindo-dashboard.jpg",
     coverAlt:
-      "Screenshot of the BISINDO Detector user dashboard showing four application steps",
-    caseStudyPath: "/projects/bisindo-detector",
+      "BISINDO Detector user dashboard",
+    caseStudyPath:
+      "/projects/bisindo-detector",
   },
   {
     slug: "parentcare",
     title: "ParentCare",
-    label: "Team Capstone",
+    label: "Coding Camp 2025 / Team Capstone",
     summary:
-      "A parenting consultation platform with a quiz, community discussion space, and educational articles.",
+      "A collaborative parenting platform featuring an interactive parenting-style quiz, personalized recommendations, community discussions, and educational articles.",
     technologies: [
       "Next.js",
+      "TypeScript",
       "Tailwind CSS",
       "Express.js",
       "Supabase",
     ],
-    highlight: "Coding Camp 2025",
+    highlight: "Interactive parenting consultation",
+    coverImage:
+      "/images/projects/parentcare-home.png",
+    coverAlt:
+      "ParentCare homepage with a family illustration and parenting quiz introduction",
+    caseStudyPath:
+      "/projects/parentcare",
   },
   {
     slug: "devjourney",
@@ -46,8 +62,14 @@ export const projects: readonly ProjectSummary[] = [
     label: "Personal Full-Stack Project",
     summary:
       "A local study tracker with topics, study sessions, REST endpoints, and learning statistics.",
-    technologies: ["React", "TypeScript", "Go", "PostgreSQL"],
-    githubUrl: "https://github.com/adeluindra/devjourney",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Go",
+      "PostgreSQL",
+    ],
+    githubUrl:
+      "https://github.com/adeluindra/devjourney",
     highlight: "Go REST API",
   },
 ];
