@@ -8,6 +8,9 @@ import { profile } from "@/data/profile";
 const navLinks = [
   { href: "/#projects", label: "Projects" },
   { href: "/#experience", label: "Experience" },
+  { href: "/#about", label: "About" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#certifications", label: "Certifications" },
   { href: "/#contact", label: "Contact" },
 ] as const;
 
@@ -31,45 +34,49 @@ export function Header() {
   }, [isOpen]);
 
   return (
-    <header className="site-header sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-xl">
       <div className="container-page flex h-[72px] items-center justify-between gap-5">
+        {/* LOGO */}
         <Link
           href="/#home"
-          className="text-xl font-extrabold tracking-[-0.075em] text-foreground focus-ring"
-          aria-label="MSAL, back to top"
+          className="shrink-0 text-xl font-extrabold tracking-[-0.075em] text-foreground focus-ring"
+          aria-label="MSAL, back to homepage"
           onClick={() => setIsOpen(false)}
         >
           MSAL<span className="text-accent">.</span>
         </Link>
 
+        {/* DESKTOP NAVIGATION */}
         <nav
           aria-label="Main navigation"
-          className="hidden items-center gap-8 md:flex"
+          className="hidden items-center gap-5 lg:flex xl:gap-7"
         >
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="nav-link focus-ring"
+              className="nav-link whitespace-nowrap focus-ring"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        {/* HEADER ACTIONS */}
+        <div className="flex shrink-0 items-center gap-3">
           <a
             href={profile.cvUrl}
             download="Moh_Syafiq_Ade_Luwindra_CV.pdf"
-            className="button button-dark hidden sm:inline-flex"
+            className="button button-dark hidden xl:inline-flex"
           >
             Download CV
             <span aria-hidden="true">↘</span>
           </a>
 
+          {/* MOBILE MENU BUTTON */}
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-xl border border-line text-xl text-foreground focus-ring md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-line text-xl text-foreground focus-ring lg:hidden"
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
@@ -82,19 +89,20 @@ export function Header() {
         </div>
       </div>
 
+      {/* MOBILE NAVIGATION */}
       {isOpen && (
         <nav
           id="mobile-navigation"
           aria-label="Mobile navigation"
-          className="border-t border-line bg-white p-4 md:hidden"
+          className="border-t border-line bg-white shadow-lg lg:hidden"
         >
-          <div className="container-page flex flex-col gap-1">
+          <div className="container-page flex flex-col gap-1 py-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-foreground hover:bg-slate-100 focus-ring"
+                className="rounded-xl px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-blue-50 hover:text-accent focus-ring"
               >
                 {link.label}
               </Link>
@@ -103,10 +111,10 @@ export function Header() {
             <a
               href={profile.cvUrl}
               download="Moh_Syafiq_Ade_Luwindra_CV.pdf"
-              className="mt-2 rounded-lg bg-foreground px-3 py-3 text-center text-sm font-semibold text-white focus-ring sm:hidden"
               onClick={() => setIsOpen(false)}
+              className="mt-3 rounded-xl bg-foreground px-4 py-3 text-center text-sm font-semibold text-white focus-ring"
             >
-              Download CV
+              Download CV ↘
             </a>
           </div>
         </nav>
