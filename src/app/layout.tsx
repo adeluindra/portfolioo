@@ -1,21 +1,74 @@
-import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import "./globals.css";
-import { profile } from "@/data/profile";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans", display: "swap" });
+import type { Metadata, Viewport } from "next";
+import { Geist } from "next/font/google";
+
+import { profile } from "@/data/profile";
+import { indexingEnabled, siteUrl } from "@/lib/site";
+
+import "./globals.css";
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
+
+const siteTitle = `${profile.fullName} | ${profile.role}`;
 
 export const metadata: Metadata = {
-  title: `${profile.fullName} | Junior Full-Stack Developer`,
+  title: siteTitle,
   description: profile.shortIntro,
-  robots: { index: false, follow: false }, // Enable indexing when the public domain and content are verified.
+
+  applicationName: "MSAL Portfolio",
+  creator: profile.fullName,
+  publisher: profile.fullName,
+
+  ...(siteUrl
+    ? { metadataBase: new URL(siteUrl) }
+    : {}),
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "MSAL Portfolio",
+    title: siteTitle,
+    description: profile.shortIntro,
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: profile.shortIntro,
+  },
+
+  robots: {
+    index: indexingEnabled,
+    follow: indexingEnabled,
+    googleBot: {
+      index: indexingEnabled,
+      follow: indexingEnabled,
+    },
+  },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#f8fafc",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en" className={geist.variable}>
       <body>
-        <a href="#main-content" className="skip-link">Skip to content</a>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+
         {children}
       </body>
     </html>

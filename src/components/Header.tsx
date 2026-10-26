@@ -2,7 +2,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
 import { profile } from "@/data/profile";
 
 const navLinks = [
@@ -17,31 +18,41 @@ const navLinks = [
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
+
   useEffect(() => {
     if (!isOpen) return;
 
-    const closeOnEscape = (event: KeyboardEvent) => {
+    firstLinkRef.current?.focus();
+
+    const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsOpen(false);
+        menuButtonRef.current?.focus();
       }
     };
 
-    window.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("keydown", handleEscape);
 
     return () => {
-      window.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("keydown", handleEscape);
     };
   }, [isOpen]);
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-xl">
       <div className="container-page flex h-[72px] items-center justify-between gap-5">
-        {/* LOGO */}
+        {/* BRAND */}
         <Link
           href="/#home"
           className="shrink-0 text-xl font-extrabold tracking-[-0.075em] text-foreground focus-ring"
           aria-label="MSAL, back to homepage"
-          onClick={() => setIsOpen(false)}
+          onClick={closeMenu}
         >
           MSAL<span className="text-accent">.</span>
         </Link>
@@ -73,8 +84,8 @@ export function Header() {
             <span aria-hidden="true">↘</span>
           </a>
 
-          {/* MOBILE MENU BUTTON */}
           <button
+            ref={menuButtonRef}
             type="button"
             className="flex h-11 w-11 items-center justify-center rounded-xl border border-line text-xl text-foreground focus-ring lg:hidden"
             aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -90,35 +101,36 @@ export function Header() {
       </div>
 
       {/* MOBILE NAVIGATION */}
-      {isOpen && (
-        <nav
-          id="mobile-navigation"
-          aria-label="Mobile navigation"
-          className="border-t border-line bg-white shadow-lg lg:hidden"
-        >
-          <div className="container-page flex flex-col gap-1 py-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="rounded-xl px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-blue-50 hover:text-accent focus-ring"
-              >
-                {link.label}
-              </Link>
-            ))}
-
-            <a
-              href={profile.cvUrl}
-              download="Moh_Syafiq_Ade_Luwindra_CV.pdf"
-              onClick={() => setIsOpen(false)}
-              className="mt-3 rounded-xl bg-foreground px-4 py-3 text-center text-sm font-semibold text-white focus-ring"
+      <nav
+        id="mobile-navigation"
+        aria-label="Mobile navigation"
+        className={`border-t border-line bg-white shadow-lg lg:hidden ${
+          isOpen ? "block" : "hidden"
+        }`}
+      >
+        <div className="container-page flex flex-col gap-1 py-4">
+          {navLinks.map((link, index) => (
+            <Link
+              key={link.href}
+              ref={index === 0 ? firstLinkRef : undefined}
+              href={link.href}
+              onClick={closeMenu}
+              className="rounded-xl px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-blue-50 hover:text-accent focus-ring"
             >
-              Download CV ↘
-            </a>
-          </div>
-        </nav>
-      )}
+              {link.label}
+            </Link>
+          ))}
+
+          <a
+            href={profile.cvUrl}
+            download="Moh_Syafiq_Ade_Luwindra_CV.pdf"
+            onClick={closeMenu}
+            className="mt-3 rounded-xl bg-foreground px-4 py-3 text-center text-sm font-semibold text-white focus-ring"
+          >
+            Download CV ↘
+          </a>
+        </div>
+      </nav>
     </header>
   );
 }
