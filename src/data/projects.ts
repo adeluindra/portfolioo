@@ -30,10 +30,8 @@ export const projects: readonly ProjectSummary[] = [
     highlight: "26 alphabet classes",
     coverImage:
       "/images/projects/bisindo-dashboard.jpg",
-    coverAlt:
-      "BISINDO Detector user dashboard",
-    caseStudyPath:
-      "/projects/bisindo-detector",
+    coverAlt: "BISINDO Detector user dashboard",
+    caseStudyPath: "/projects/bisindo-detector",
   },
   {
     slug: "parentcare",
@@ -53,23 +51,28 @@ export const projects: readonly ProjectSummary[] = [
       "/images/projects/parentcare-home.png",
     coverAlt:
       "ParentCare homepage with a family illustration and parenting quiz introduction",
-    caseStudyPath:
-      "/projects/parentcare",
+    caseStudyPath: "/projects/parentcare",
   },
   {
     slug: "devjourney",
     title: "DevJourney",
     label: "Personal Full-Stack Project",
     summary:
-      "A local study tracker with topics, study sessions, REST endpoints, and learning statistics.",
+      "A local learning tracker for managing study topics, recording sessions, and reviewing statistics with a Go REST API and PostgreSQL database.",
     technologies: [
       "React",
       "TypeScript",
       "Go",
       "PostgreSQL",
+      "Tailwind CSS",
     ],
     githubUrl:
       "https://github.com/adeluindra/devjourney",
-    highlight: "Go REST API",
+    highlight: "Go REST API + PostgreSQL",
+    coverImage:
+      "/images/projects/devjourney-dashboard.png",
+    coverAlt:
+      "DevJourney dark-mode learning dashboard showing learning statistics and recent study sessions",
+    caseStudyPath: "/projects/devjourney",
   },
 ];
