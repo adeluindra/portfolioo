@@ -18,7 +18,7 @@ export const projects: readonly ProjectSummary[] = [
     title: "BISINDO Detector",
     label: "Thesis / Machine Learning",
     summary:
-      "Browser-based Indonesian Sign Language alphabet recognition using real-time hand tracking and classification.",
+      "A real-time Indonesian Sign Language alphabet recognition application featuring webcam-based hand tracking, machine learning classification, and interactive practice.",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -27,10 +27,11 @@ export const projects: readonly ProjectSummary[] = [
     ],
     githubUrl:
       "https://github.com/adeluindra/bisindo-detector",
-    highlight: "26 alphabet classes",
+    highlight: "26 alphabet classes · ~91% model evaluation accuracy",
     coverImage:
-      "/images/projects/bisindo-dashboard.jpg",
-    coverAlt: "BISINDO Detector user dashboard",
+      "/images/projects/bisindo-realtime-detection.png",
+    coverAlt:
+      "BISINDO Detector performing real-time sign language recognition with hand landmarks and prediction feedback",
     caseStudyPath: "/projects/bisindo-detector",
   },
   {
