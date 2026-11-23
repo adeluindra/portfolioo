@@ -17,10 +17,10 @@ export function ProjectPreview() {
           id="projects-heading"
           eyebrow="Selected work"
           title="Projects I've worked on"
-          description="Three case studies showcasing web development, machine learning integration, and full-stack engineering."
+          description="Four case studies showcasing web development, machine learning integration, and full-stack engineering."
         />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project) => {
             const visibleTechnologies =
               project.technologies.slice(0, 4);
@@ -32,7 +32,9 @@ export function ProjectPreview() {
             const coverBackground =
               project.slug === "parentcare"
                 ? "bg-[#fff1eb]"
-                : "bg-[#080e1f]";
+                : project.slug === "stockguard"
+                  ? "bg-white"
+                  : "bg-[#080e1f]";
 
             return (
               <article
@@ -51,8 +53,12 @@ export function ProjectPreview() {
                         `${project.title} application screenshot`
                       }
                       fill
-                      sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 360px"
-                      className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                      sizes="(max-width: 767px) 100vw, 560px"
+                      className={`${
+                        project.coverFit === "cover"
+                          ? "object-cover object-left-top"
+                          : "object-contain"
+                      } transition-transform duration-300 group-hover:scale-[1.02]`}
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center p-6">

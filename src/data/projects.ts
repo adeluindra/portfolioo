@@ -9,6 +9,8 @@ export type ProjectSummary = {
   highlight: string;
   coverImage?: string;
   coverAlt?: string;
+  /** "cover" fills the card and crops from the top-left; default is "contain". */
+  coverFit?: "contain" | "cover";
   caseStudyPath?: string;
 };
 
@@ -33,6 +35,30 @@ export const projects: readonly ProjectSummary[] = [
     coverAlt:
       "BISINDO Detector performing real-time sign language recognition with hand landmarks and prediction feedback",
     caseStudyPath: "/projects/bisindo-detector",
+  },
+  {
+    slug: "stockguard",
+    title: "StockGuard",
+    label: "Personal Full-Stack Project",
+    summary:
+      "An inventory reservation and order management system with role-based access, atomic stock reservations, idempotent writes, and a complete inventory audit trail.",
+    technologies: [
+      "Go",
+      "PostgreSQL",
+      "React",
+      "TypeScript",
+      "Docker",
+      "GitHub Actions",
+    ],
+    githubUrl:
+      "https://github.com/adeluindra/stockguard",
+    highlight: "Transactional stock reservations · Session + CSRF auth",
+    coverImage:
+      "/images/projects/stockguard-dashboard.png",
+    coverAlt:
+      "StockGuard operational dashboard showing active products, on-hand, reserved, available, and low-stock inventory summary",
+    coverFit: "cover",
+    caseStudyPath: "/projects/stockguard",
   },
   {
     slug: "parentcare",
