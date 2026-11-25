@@ -1,3 +1,4 @@
+import { MotionCard } from "@/components/MotionCard";
 import { SectionHeading } from "@/components/SectionHeading";
 
 export function Experience() {
@@ -5,7 +6,13 @@ export function Experience() {
     <section id="experience" className="section-space">
       <div className="container-page">
         <SectionHeading eyebrow="Experience" title="Professional experience" description="Practical web development experience in a professional setting." />
-        <div className="grid gap-7 rounded-[22px] border border-line bg-surface p-6 md:grid-cols-[0.8fr_1.2fr] md:p-10">
+        <MotionCard
+          as="div"
+          index={0}
+          hoverY={-5}
+          hoverScale={1.006}
+          className="grid gap-7 rounded-[22px] border border-line bg-surface p-6 transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:grid-cols-[0.8fr_1.2fr] md:p-10"
+        >
           <div>
             <p className="text-sm font-semibold text-accent">Oct – Dec 2025</p>
             <h3 className="mt-3 text-xl font-bold text-foreground">Web Developer Intern</h3>
@@ -21,7 +28,7 @@ export function Experience() {
               <p className="mt-2 text-sm leading-7 text-muted">Developed a Laravel and MySQL website for residential, housing, and RT/RW data management.</p>
             </div>
           </div>
-        </div>
+        </MotionCard>
       </div>
     </section>
   );

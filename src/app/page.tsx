@@ -12,6 +12,7 @@ import { Skills } from "@/components/Skills";
 import { Certifications } from "@/components/Certifications";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { ScrollAnimations } from "@/components/ScrollAnimations";
 
 export const metadata: Metadata = {
   ...(siteUrl
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <ScrollAnimations />
       <Header />
 
       <main id="main-content">

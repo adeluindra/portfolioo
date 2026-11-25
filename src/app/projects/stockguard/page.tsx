@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Header } from "@/components/Header";
+import { MotionCard } from "@/components/MotionCard";
+import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -208,6 +210,7 @@ const practices = [
 export default function StockGuardPage() {
   return (
     <>
+      <ScrollAnimations heroStagger />
       <Header />
 
       <main id="main-content">
@@ -374,9 +377,11 @@ export default function StockGuardPage() {
             </p>
 
             <div className="mt-10 grid gap-6 md:grid-cols-2">
-              {screenshots.map((item) => (
-                <article
+              {screenshots.map((item, index) => (
+                <MotionCard
                   key={item.number}
+                  index={index}
+                  hoverY={-6}
                   className="group flex flex-col overflow-hidden rounded-[22px] border border-line bg-white transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(15,23,42,0.08)]"
                 >
                   <a
@@ -418,7 +423,7 @@ export default function StockGuardPage() {
                       <span aria-hidden="true">↗</span>
                     </a>
                   </div>
-                </article>
+                </MotionCard>
               ))}
             </div>
           </div>
@@ -442,10 +447,12 @@ export default function StockGuardPage() {
             </h2>
 
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {features.map((feature) => (
-                <article
+              {features.map((feature, index) => (
+                <MotionCard
                   key={feature.number}
-                  className="rounded-[20px] border border-line bg-background p-7"
+                  index={index}
+                  hoverY={-5}
+                  className="rounded-[20px] border border-line bg-background p-7 transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-sm"
                 >
                   <p className="text-sm font-bold text-accent">
                     {feature.number}
@@ -458,7 +465,7 @@ export default function StockGuardPage() {
                   <p className="mt-3 text-sm leading-8 text-muted">
                     {feature.description}
                   </p>
-                </article>
+                </MotionCard>
               ))}
             </div>
           </div>
@@ -620,9 +627,11 @@ export default function StockGuardPage() {
             <div className="mt-9 rounded-[24px] bg-[#0b1425] p-5 sm:p-8">
               <div className="grid gap-4 md:grid-cols-3">
                 {architecture.map((item, index) => (
-                  <article
+                  <MotionCard
                     key={item.title}
-                    className="rounded-2xl border border-white/15 bg-white/5 p-6"
+                    index={index}
+                    hoverY={-5}
+                    className="rounded-2xl border border-white/15 bg-white/5 p-6 transition-colors duration-200 hover:border-blue-300/40"
                   >
                     <p className="text-sm font-bold text-emerald-300">
                       0{index + 1}
@@ -639,7 +648,7 @@ export default function StockGuardPage() {
                     <p className="mt-4 text-sm leading-7 text-slate-300">
                       {item.description}
                     </p>
-                  </article>
+                  </MotionCard>
                 ))}
               </div>
 
@@ -733,10 +742,12 @@ export default function StockGuardPage() {
             </h2>
 
             <div className="mt-9 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {practices.map((practice) => (
-                <article
+              {practices.map((practice, index) => (
+                <MotionCard
                   key={practice.title}
-                  className="rounded-[20px] border border-line bg-background p-7"
+                  index={index}
+                  hoverY={-5}
+                  className="rounded-[20px] border border-line bg-background p-7 transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-sm"
                 >
                   <h3 className="text-lg font-bold text-foreground">
                     {practice.title}
@@ -745,7 +756,7 @@ export default function StockGuardPage() {
                   <p className="mt-3 text-sm leading-8 text-muted">
                     {practice.description}
                   </p>
-                </article>
+                </MotionCard>
               ))}
             </div>
           </div>

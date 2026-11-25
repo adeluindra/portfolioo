@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Header } from "@/components/Header";
+import { MotionCard } from "@/components/MotionCard";
+import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -86,6 +88,7 @@ const endpoints = [
 export default function DevJourneyPage() {
   return (
     <>
+      <ScrollAnimations heroStagger />
       <Header />
 
       <main id="main-content">
@@ -246,10 +249,13 @@ export default function DevJourneyPage() {
             </p>
 
             <div className="mt-10 space-y-7">
-              {screenshots.map((item) => (
-                <article
+              {screenshots.map((item, index) => (
+                <MotionCard
                   key={item.number}
-                  className="grid overflow-hidden rounded-[24px] border border-line bg-white lg:grid-cols-[0.75fr_1.25fr]"
+                  index={index}
+                  hoverY={-5}
+                  hoverScale={1.006}
+                  className="grid overflow-hidden rounded-[24px] border border-line bg-white transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(15,23,42,0.08)] lg:grid-cols-[0.75fr_1.25fr]"
                 >
                   <div className="flex flex-col justify-center p-6 sm:p-9">
                     <p className="text-sm font-bold text-accent">
@@ -283,7 +289,7 @@ export default function DevJourneyPage() {
                       className="object-contain"
                     />
                   </div>
-                </article>
+                </MotionCard>
               ))}
             </div>
           </div>
@@ -315,9 +321,11 @@ export default function DevJourneyPage() {
             <div className="mt-9 rounded-[24px] bg-[#0b1425] p-5 sm:p-8">
               <div className="grid gap-4 md:grid-cols-3">
                 {architecture.map((item, index) => (
-                  <article
+                  <MotionCard
                     key={item.title}
-                    className="rounded-2xl border border-white/15 bg-white/5 p-6"
+                    index={index}
+                    hoverY={-5}
+                    className="rounded-2xl border border-white/15 bg-white/5 p-6 transition-colors duration-200 hover:border-blue-300/40"
                   >
                     <p className="text-sm font-bold text-emerald-300">
                       0{index + 1}
@@ -334,7 +342,7 @@ export default function DevJourneyPage() {
                     <p className="mt-4 text-sm leading-7 text-slate-300">
                       {item.description}
                     </p>
-                  </article>
+                  </MotionCard>
                 ))}
               </div>
 
@@ -445,10 +453,12 @@ export default function DevJourneyPage() {
                   description:
                     "The repository includes Go backend tests and frontend tests using Vitest.",
                 },
-              ].map((practice) => (
-                <article
+              ].map((practice, index) => (
+                <MotionCard
                   key={practice.title}
-                  className="rounded-[20px] border border-line bg-background p-7"
+                  index={index}
+                  hoverY={-5}
+                  className="rounded-[20px] border border-line bg-background p-7 transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-sm"
                 >
                   <h3 className="text-lg font-bold text-foreground">
                     {practice.title}
@@ -457,7 +467,7 @@ export default function DevJourneyPage() {
                   <p className="mt-3 text-sm leading-8 text-muted">
                     {practice.description}
                   </p>
-                </article>
+                </MotionCard>
               ))}
             </div>
           </div>

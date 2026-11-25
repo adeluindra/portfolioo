@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { projects } from "@/data/projects";
+import { MotionCard } from "@/components/MotionCard";
 import { SectionHeading } from "@/components/SectionHeading";
 
 export function ProjectPreview() {
@@ -21,7 +22,7 @@ export function ProjectPreview() {
         />
 
         <div className="grid gap-6 md:grid-cols-2">
-          {projects.map((project) => {
+          {projects.map((project, index) => {
             const visibleTechnologies =
               project.technologies.slice(0, 4);
 
@@ -37,9 +38,11 @@ export function ProjectPreview() {
                   : "bg-[#080e1f]";
 
             return (
-              <article
+              <MotionCard
                 key={project.slug}
-                className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-line bg-white transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(15,23,42,0.08)]"
+                index={index}
+                hoverY={-7}
+                className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-line bg-white transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_22px_55px_rgba(15,23,42,0.1)]"
               >
                 {/* PROJECT SCREENSHOT */}
                 <div
@@ -139,7 +142,7 @@ export function ProjectPreview() {
                     )}
                   </div>
                 </div>
-              </article>
+              </MotionCard>
             );
           })}
         </div>

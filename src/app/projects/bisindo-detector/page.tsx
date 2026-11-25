@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Header } from "@/components/Header";
+import { MotionCard } from "@/components/MotionCard";
+import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -145,6 +147,7 @@ const technicalApproach = [
 export default function BisindoCaseStudyPage() {
   return (
     <>
+      <ScrollAnimations heroStagger />
       <Header />
 
       <main id="main-content">
@@ -287,10 +290,13 @@ export default function BisindoCaseStudyPage() {
 
             <div className="mt-9 rounded-[24px] bg-[#0b1224] p-5 sm:p-8">
               <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {architecture.map((step) => (
-                  <li
+                {architecture.map((step, index) => (
+                  <MotionCard
+                    as="li"
                     key={step.number}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-6"
+                    index={index}
+                    hoverY={-5}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors duration-200 hover:border-violet-300/40"
                   >
                     <span className="text-sm font-bold text-violet-300">
                       STEP {step.number}
@@ -303,7 +309,7 @@ export default function BisindoCaseStudyPage() {
                     <p className="mt-3 text-sm leading-7 text-slate-300">
                       {step.description}
                     </p>
-                  </li>
+                  </MotionCard>
                 ))}
               </ol>
 
@@ -351,10 +357,13 @@ export default function BisindoCaseStudyPage() {
             </p>
 
             <div className="mt-10 grid gap-6 lg:grid-cols-2">
-              {screenshots.map((item) => (
-                <figure
+              {screenshots.map((item, index) => (
+                <MotionCard
+                  as="figure"
                   key={item.number}
-                  className="flex flex-col overflow-hidden rounded-[22px] border border-line bg-white"
+                  index={index}
+                  hoverY={-6}
+                  className="flex flex-col overflow-hidden rounded-[22px] border border-line bg-white transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(15,23,42,0.08)]"
                 >
                   <a
                     href={item.image}
@@ -394,7 +403,7 @@ export default function BisindoCaseStudyPage() {
                       View full screenshot ↗
                     </a>
                   </figcaption>
-                </figure>
+                </MotionCard>
               ))}
             </div>
 
@@ -436,8 +445,9 @@ export default function BisindoCaseStudyPage() {
 
             <div className="space-y-8">
               {technicalApproach.map((item) => (
-                <article
+                <div
                   key={item.title}
+                  data-reveal
                   className="border-b border-line pb-8 last:border-b-0 last:pb-0"
                 >
                   <h3 className="text-lg font-bold text-foreground">
@@ -447,7 +457,7 @@ export default function BisindoCaseStudyPage() {
                   <p className="mt-3 text-base leading-8 text-muted">
                     {item.description}
                   </p>
-                </article>
+                </div>
               ))}
             </div>
           </div>

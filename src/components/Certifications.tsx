@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, MotionConfig, motion } from "motion/react";
 
+import { MotionCard } from "@/components/MotionCard";
 import { SectionHeading } from "@/components/SectionHeading";
 
 type Credential = {
@@ -118,10 +120,12 @@ export function Certifications() {
         />
 
         <div className="grid gap-6 md:grid-cols-2">
-          {credentials.map((credential) => (
-            <article
+          {credentials.map((credential, index) => (
+            <MotionCard
               key={credential.title}
-              className="flex h-full flex-col overflow-hidden rounded-[22px] border border-line bg-white p-4 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(15,23,42,0.08)] sm:p-5"
+              index={index}
+              hoverY={-6}
+              className="flex h-full flex-col overflow-hidden rounded-[22px] border border-line bg-white p-4 transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_20px_50px_rgba(15,23,42,0.09)] sm:p-5"
             >
               {/* CERTIFICATE PREVIEW */}
               {credential.image ? (
@@ -246,29 +250,40 @@ export function Certifications() {
                   </ul>
                 )}
               </div>
-            </article>
+            </MotionCard>
           ))}
         </div>
 
-        <p className="mt-7 max-w-3xl text-sm leading-7 text-subtle">
+        <p data-reveal className="mt-7 max-w-3xl text-sm leading-7 text-subtle">
           Click any certificate to view it in full screen.
           Additional training records are available upon request.
         </p>
       </div>
 
       {/* FULL-SCREEN LIGHTBOX MODAL */}
-      {activeCredential?.image && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="certificate-modal-title"
-          onClick={() => setActiveCredential(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 p-4 backdrop-blur-sm sm:p-8"
-        >
-          <div
-            onClick={(event) => event.stopPropagation()}
-            className="flex w-full max-w-5xl flex-col overflow-hidden rounded-[22px] border border-white/10 bg-[#0f172a] shadow-2xl"
-          >
+      <MotionConfig reducedMotion="never">
+        <AnimatePresence>
+          {activeCredential?.image && (
+            <motion.div
+              data-lenis-prevent
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="certificate-modal-title"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setActiveCredential(null)}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 p-4 backdrop-blur-sm sm:p-8"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 8 }}
+                transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                onClick={(event) => event.stopPropagation()}
+                className="flex w-full max-w-5xl flex-col overflow-hidden rounded-[22px] border border-white/10 bg-[#0f172a] shadow-2xl"
+              >
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 py-4 sm:px-6">
               <div className="min-w-0">
                 <h3
@@ -320,9 +335,11 @@ export function Certifications() {
                 />
               </div>
             </div>
-          </div>
-        </div>
-      )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </MotionConfig>
     </section>
   );
 }

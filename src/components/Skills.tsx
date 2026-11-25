@@ -1,4 +1,5 @@
 
+import { MotionCard } from "@/components/MotionCard";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const skillGroups = [
@@ -76,10 +77,12 @@ export function Skills() {
         />
 
         <div className="grid gap-5 md:grid-cols-2">
-          {skillGroups.map((group) => (
-            <article
+          {skillGroups.map((group, index) => (
+            <MotionCard
               key={group.title}
-              className="rounded-[22px] border border-line bg-white p-7 transition-colors duration-200 hover:border-blue-200 sm:p-8"
+              index={index}
+              hoverY={-5}
+              className="rounded-[22px] border border-line bg-white p-7 transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_18px_45px_rgba(15,23,42,0.07)] sm:p-8"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -113,11 +116,11 @@ export function Skills() {
                   </li>
                 ))}
               </ul>
-            </article>
+            </MotionCard>
           ))}
         </div>
 
-        <p className="mt-6 text-sm leading-7 text-subtle">
+        <p data-reveal className="mt-6 text-sm leading-7 text-subtle">
           My featured projects provide practical examples
           of how I have applied these technologies.
         </p>

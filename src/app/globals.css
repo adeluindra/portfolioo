@@ -24,7 +24,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+html { scroll-padding-top: 90px; }
+html:not(.lenis) { scroll-behavior: smooth; }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-geist-sans), Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 a, button { -webkit-tap-highlight-color: transparent; }
 section[id] { scroll-margin-top: 90px; }
@@ -50,3 +51,7 @@ section[id] { scroll-margin-top: 90px; }
 @media (min-width: 1024px) { .container-page { width: min(100% - 4rem, 1120px); } }
 @media (max-width: 639px) { .section-space { padding-block: 4rem; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* GSAP word-reveal mask (overflow: clip avoids creating nested scroll containers) */
+.split-word { display: inline-block; overflow: clip; vertical-align: bottom; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.split-word-inner { display: inline-block; }

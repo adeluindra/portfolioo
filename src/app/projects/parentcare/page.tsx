@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Header } from "@/components/Header";
+import { MotionCard } from "@/components/MotionCard";
+import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -78,6 +80,7 @@ const gallery = [
 export default function ParentCarePage() {
   return (
     <>
+      <ScrollAnimations heroStagger />
       <Header />
 
       <main id="main-content">
@@ -243,16 +246,19 @@ export default function ParentCarePage() {
             </h2>
 
             <p className="mt-4 max-w-2xl leading-8 text-muted">
-              A closer look at the application's
+              A closer look at the application&apos;s
               key features, using screenshots from
               the original capstone project.
             </p>
 
             <div className="mt-10 space-y-7">
-              {gallery.map((item) => (
-                <article
+              {gallery.map((item, index) => (
+                <MotionCard
                   key={item.number}
-                  className="grid overflow-hidden rounded-[24px] border border-line bg-white lg:grid-cols-[0.8fr_1.2fr]"
+                  index={index}
+                  hoverY={-5}
+                  hoverScale={1.006}
+                  className="grid overflow-hidden rounded-[24px] border border-line bg-white transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(15,23,42,0.08)] lg:grid-cols-[0.8fr_1.2fr]"
                 >
                   <div className="flex flex-col justify-center p-6 sm:p-9">
                     <p className="text-sm font-bold text-accent">
@@ -286,7 +292,7 @@ export default function ParentCarePage() {
                       className="object-contain"
                     />
                   </div>
-                </article>
+                </MotionCard>
               ))}
             </div>
           </div>
@@ -326,7 +332,7 @@ export default function ParentCarePage() {
                 interactive questionnaires, result
                 presentation, educational resources,
                 and community features. These
-                capabilities represent the team's
+                capabilities represent the team&apos;s
                 collective project work.
               </p>
 

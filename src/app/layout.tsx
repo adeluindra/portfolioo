@@ -4,6 +4,7 @@ import { Geist } from "next/font/google";
 
 import { profile } from "@/data/profile";
 import { indexingEnabled, siteUrl } from "@/lib/site";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 import "./globals.css";
 
@@ -65,6 +66,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={geist.variable}>
       <body>
+        <SmoothScroll />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>

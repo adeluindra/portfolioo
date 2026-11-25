@@ -1,4 +1,5 @@
 
+import { MotionCard } from "@/components/MotionCard";
 import { SectionHeading } from "@/components/SectionHeading";
 
 export function About() {
@@ -18,7 +19,13 @@ export function About() {
 
         <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
           {/* PROFESSIONAL BACKGROUND */}
-          <div className="rounded-[24px] border border-line bg-background p-7 sm:p-10">
+          <MotionCard
+            as="div"
+            index={0}
+            hoverY={-4}
+            hoverScale={1.006}
+            className="rounded-[24px] border border-line bg-background p-7 transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_18px_45px_rgba(15,23,42,0.06)] sm:p-10"
+          >
             <p className="text-xl font-semibold leading-9 tracking-tight text-foreground sm:text-2xl">
               I enjoy turning practical problems into
               web applications that people can use.
@@ -59,11 +66,15 @@ export function About() {
                 <span aria-hidden="true">↗</span>
               </a>
             </div>
-          </div>
+          </MotionCard>
 
           {/* EDUCATION AND INTERESTS */}
           <div className="grid gap-5">
-            <article className="rounded-[24px] border border-line bg-white p-7">
+            <MotionCard
+              index={1}
+              hoverY={-5}
+              className="rounded-[24px] border border-line bg-white p-7 transition-[border-color,box-shadow] duration-200 hover:border-blue-200 hover:shadow-[0_18px_45px_rgba(15,23,42,0.07)]"
+            >
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
                 Education
               </p>
@@ -84,9 +95,13 @@ export function About() {
                 Thesis defended · BISINDO real-time
                 alphabet recognition
               </p>
-            </article>
+            </MotionCard>
 
-            <article className="rounded-[24px] border border-line bg-[#0f172a] p-7 text-white">
+            <MotionCard
+              index={2}
+              hoverY={-5}
+              className="rounded-[24px] border border-line bg-[#0f172a] p-7 text-white transition-shadow duration-200 hover:shadow-[0_22px_50px_rgba(15,23,42,0.22)]"
+            >
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">
                 What I focus on
               </p>
@@ -114,7 +129,7 @@ export function About() {
                   </span>
                 ))}
               </div>
-            </article>
+            </MotionCard>
           </div>
         </div>
       </div>
