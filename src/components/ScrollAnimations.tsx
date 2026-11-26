@@ -132,6 +132,9 @@ export function ScrollAnimations({
     }
 
     const restores: Array<() => void> = [];
+    const heroTweens: gsap.core.Tween[] = [];
+    const waitForPreloader =
+      typeof window !== "undefined" && !window.__msalPreloaderDone;
 
     const ctx = gsap.context(() => {
       const sections = Array.from(
@@ -154,18 +157,21 @@ export function ScrollAnimations({
           restores.push(split.restore);
 
           if (isHero) {
-            gsap.fromTo(
-              split.words,
-              { yPercent: 115, opacity: 0 },
-              {
-                yPercent: 0,
-                opacity: 1,
-                duration: 0.85,
-                ease: "power4.out",
-                stagger: 0.09,
-                delay: 0.1,
-                clearProps: "transform,opacity",
-              },
+            heroTweens.push(
+              gsap.fromTo(
+                split.words,
+                { yPercent: 115, opacity: 0 },
+                {
+                  yPercent: 0,
+                  opacity: 1,
+                  duration: 0.85,
+                  ease: "power4.out",
+                  stagger: 0.09,
+                  delay: 0.1,
+                  paused: waitForPreloader,
+                  clearProps: "transform,opacity",
+                },
+              ),
             );
           } else {
             gsap.set(split.words, { yPercent: 115, opacity: 0 });
@@ -201,18 +207,21 @@ export function ScrollAnimations({
         }
 
         if (isHero) {
-          gsap.fromTo(
-            targets,
-            { autoAlpha: 0, y: 28, transitionProperty: "none" },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.7,
-              ease: "power3.out",
-              stagger: 0.08,
-              delay: 0.05,
-              clearProps: CLEAR_PROPS,
-            },
+          heroTweens.push(
+            gsap.fromTo(
+              targets,
+              { autoAlpha: 0, y: 28, transitionProperty: "none" },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.7,
+                ease: "power3.out",
+                stagger: 0.08,
+                delay: 0.05,
+                paused: waitForPreloader,
+                clearProps: CLEAR_PROPS,
+              },
+            ),
           );
         } else {
           gsap.set(targets, {
@@ -262,6 +271,17 @@ export function ScrollAnimations({
       });
     }, main);
 
+    const playHero = () => {
+      heroTweens.forEach((tween) => tween.play());
+    };
+
+    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
+
+    if (waitForPreloader && heroTweens.length > 0) {
+      window.addEventListener("preloader:reveal", playHero, { once: true });
+      fallbackTimer = setTimeout(playHero, 1800);
+    }
+
     // Keep ScrollTrigger positions accurate as lazy images finish loading.
     let rafId = requestAnimationFrame(() => {
       ScrollTrigger.refresh();
@@ -278,6 +298,10 @@ export function ScrollAnimations({
     resizeObserver.observe(main);
 
     return () => {
+      window.removeEventListener("preloader:reveal", playHero);
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+      }
       cancelAnimationFrame(rafId);
       resizeObserver.disconnect();
       ctx.revert();
